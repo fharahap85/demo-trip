@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Info Peserta Company Trip 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F5F5EF; --surface:#FFFFFF; --ink:#14213D; --muted:#5B6475; --line:#E1E2DA;
+  --navy:#14213D; --on-navy:#F5F5EF; --sun:#F2B705; --on-sun:#14213D; --soft:#EEF0F6; --ok:#1F7A4D; --err:#B3261E;
+  color-scheme: light;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0E1424; --surface:#172036; --ink:#ECEEF4; --muted:#A3AABB; --line:#26304A;
+    --navy:#1C2A4C; --on-navy:#ECEEF4; --sun:#F5C531; --on-sun:#14213D; --soft:#1E2944; --ok:#5CC48E; --err:#F2867D;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0E1424; --surface:#172036; --ink:#ECEEF4; --muted:#A3AABB; --line:#26304A;
+  --navy:#1C2A4C; --on-navy:#ECEEF4; --sun:#F5C531; --on-sun:#14213D; --soft:#1E2944; --ok:#5CC48E; --err:#F2867D;
+  color-scheme: dark;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{background:var(--paper);color:var(--ink);font-family:"Figtree",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:"Bricolage Grotesque","Figtree",system-ui,sans-serif;line-height:1.1;margin:0}
+button,input,select{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--sun);outline-offset:2px;border-radius:6px}
+[hidden]{display:none!important}
+.app{max-width:440px;margin:0 auto;min-height:100%;position:relative;background:var(--paper)}
+@media (min-width:600px){
+  body{background:var(--soft)}
+  .app{box-shadow:0 0 0 1px var(--line);min-height:100%}
+  .desk-note{display:block!important}
+}
+.desk-note{display:none;position:fixed;left:24px;bottom:24px;max-width:220px;font-size:13px;color:var(--muted)}
+
+/* ---------- Registrasi ---------- */
+.reg-hero{background:var(--navy);color:var(--on-navy);padding:28px 22px 64px;position:relative;overflow:hidden}
+.reg-hero .org{font-size:14px;opacity:.8}
+.reg-hero h1{font-size:40px;font-weight:800;margin-top:28px;letter-spacing:-.02em}
+.reg-hero p{margin:12px 0 0;max-width:30ch;opacity:.85}
+.route{position:absolute;right:-10px;top:10px;width:180px;opacity:.9}
+.reg-card{background:var(--surface);margin:-40px 16px 0;border-radius:20px;padding:22px 18px;position:relative;border:1px solid var(--line)}
+.reg-card h2{font-size:22px}
+.reg-card .hint{color:var(--muted);font-size:14px;margin:6px 0 18px}
+.field{margin-bottom:16px}
+.field label{display:block;font-weight:600;font-size:14px;margin-bottom:6px}
+.field input,.field select{width:100%;padding:13px 14px;border:1.5px solid var(--line);border-radius:12px;background:var(--paper);font-size:16px;appearance:none}
+.field select{background-image:linear-gradient(45deg,transparent 50%,var(--muted) 50%),linear-gradient(135deg,var(--muted) 50%,transparent 50%);background-position:calc(100% - 20px) 55%,calc(100% - 15px) 55%;background-size:5px 5px;background-repeat:no-repeat}
+.field input:focus,.field select:focus{border-color:var(--ink);outline:none}
+.field .err{color:var(--err);font-size:13px;margin-top:5px}
+.field.bad input,.field.bad select{border-color:var(--err)}
+.btn{display:block;width:100%;border:0;border-radius:14px;padding:15px;font-weight:700;font-size:16px;cursor:pointer;background:var(--sun);color:var(--on-sun)}
+.btn:active{transform:translateY(1px)}
+.btn-ghost{background:transparent;border:1.5px solid var(--line);color:var(--ink)}
+.privacy{font-size:13px;color:var(--muted);margin:14px 2px 0}
+.reg-foot{padding:24px 22px 40px;color:var(--muted);font-size:13px}
+
+/* ---------- Main ---------- */
+.top{padding:20px 20px 8px;display:flex;justify-content:space-between;align-items:center}
+.top .hi{font-size:14px;color:var(--muted)}
+.top .name{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:22px}
+.avatar{width:42px;height:42px;border-radius:50%;background:var(--sun);color:var(--on-sun);display:grid;place-items:center;font-weight:800;border:0;cursor:pointer}
+main{padding:0 16px calc(96px + env(safe-area-inset-bottom,0px))}
+.view{animation:in .25s ease}
+@keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.view{animation:none}}
+.sec-title{font-size:20px;margin:26px 4px 12px}
+
+/* boarding pass */
+.pass{margin-top:12px;border-radius:22px;background:var(--navy);color:var(--on-navy);position:relative;overflow:hidden}
+.pass-top{padding:20px 20px 18px}
+.pass-route{display:flex;align-items:flex-end;justify-content:space-between;gap:8px}
+.pass-route .city{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:30px;letter-spacing:-.02em}
+.pass-route .lbl{font-size:12px;opacity:.7}
+.pass-route .mid{flex:1;text-align:center;font-size:12px;opacity:.75;padding-bottom:6px}
+.pass-route .mid svg{display:block;margin:0 auto 2px}
+.pass-cut{position:relative;height:0;border-top:2px dashed rgba(255,255,255,.25);margin:0 18px}
+.pass-cut::before,.pass-cut::after{content:"";position:absolute;top:-13px;width:24px;height:24px;border-radius:50%;background:var(--paper)}
+.pass-cut::before{left:-31px}.pass-cut::after{right:-31px}
+.pass-bot{padding:16px 20px 20px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.pass-bot .k{font-size:12px;opacity:.7}
+.pass-bot .v{font-weight:700;font-size:17px}
+.countdown{background:var(--sun);color:var(--on-sun);padding:12px 20px;display:flex;justify-content:space-between;align-items:center;font-weight:600;font-size:14px}
+.countdown b{font-family:"Bricolage Grotesque",sans-serif;font-size:20px}
+
+.quick{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.quick button{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px;text-align:left;cursor:pointer}
+.quick .t{font-weight:700;display:block}
+.quick .s{font-size:13px;color:var(--muted)}
+.quick svg{width:22px;height:22px;margin-bottom:8px;color:var(--ink)}
+
+.news{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:4px 16px}
+.news-item{padding:14px 0;border-bottom:1px solid var(--line)}
+.news-item:last-child{border-bottom:0}
+.news-item .d{font-size:12px;color:var(--muted)}
+.news-item .h{font-weight:700;margin:2px 0}
+.news-item p{margin:0;font-size:14px;color:var(--muted)}
+.pin{display:inline-block;background:var(--sun);color:var(--on-sun);font-size:11px;font-weight:700;padding:2px 8px;border-radius:99px;margin-left:6px;vertical-align:2px}
+
+/* jadwal */
+.days{display:flex;gap:8px;margin:16px 0 18px;overflow-x:auto}
+.days button{flex:1;min-width:96px;border:1.5px solid var(--line);background:var(--surface);border-radius:14px;padding:10px 8px;cursor:pointer;text-align:center}
+.days button .n{font-weight:800;font-family:"Bricolage Grotesque",sans-serif;display:block}
+.days button .dt{font-size:12px;color:var(--muted)}
+.days button[aria-selected="true"]{background:var(--navy);border-color:var(--navy);color:var(--on-navy)}
+.days button[aria-selected="true"] .dt{color:var(--on-navy);opacity:.75}
+.day-head{margin:0 4px 14px}
+.day-head h2{font-size:24px}
+.day-head p{margin:4px 0 0;color:var(--muted);font-size:14px}
+.tl{list-style:none;margin:0;padding:0 0 0 4px}
+.tl li{display:grid;grid-template-columns:58px 18px 1fr;gap:0 8px}
+.tl .time{font-weight:700;font-size:15px;padding-top:1px;font-variant-numeric:tabular-nums}
+.tl .rail{position:relative}
+.tl .rail::before{content:"";position:absolute;left:7px;top:6px;width:10px;height:10px;border-radius:50%;background:var(--surface);border:2.5px solid var(--ink);box-sizing:border-box;width:14px;height:14px;left:2px}
+.tl .rail::after{content:"";position:absolute;left:8px;top:22px;bottom:-4px;width:2px;background:var(--line)}
+.tl li:last-child .rail::after{display:none}
+.tl li.key .rail::before{background:var(--sun);border-color:var(--sun)}
+.tl .body{padding-bottom:20px}
+.tl .what{font-weight:700}
+.tl .where{font-size:14px;color:var(--muted)}
+
+/* info */
+.acc{background:var(--surface);border:1px solid var(--line);border-radius:16px;margin-bottom:10px;overflow:hidden}
+.acc summary{list-style:none;padding:16px;font-weight:700;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.acc summary::-webkit-details-marker{display:none}
+.acc summary::after{content:"";width:9px;height:9px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(45deg);transition:transform .2s}
+.acc[open] summary::after{transform:rotate(-135deg)}
+.acc .in{padding:0 16px 16px;font-size:15px}
+.acc .in p{margin:0 0 8px}
+.kv{display:grid;grid-template-columns:110px 1fr;gap:6px 10px;font-size:14px}
+.kv dt{color:var(--muted)}.kv dd{margin:0;font-weight:600}
+.check{list-style:none;padding:0;margin:0}
+.check label{display:flex;gap:12px;align-items:center;padding:9px 0;cursor:pointer;border-bottom:1px solid var(--line)}
+.check li:last-child label{border-bottom:0}
+.check input{width:20px;height:20px;accent-color:var(--ink);flex:none}
+.check input:checked + span{text-decoration:line-through;color:var(--muted)}
+.prog{font-size:13px;color:var(--muted);margin-bottom:6px}
+.bar{height:6px;background:var(--soft);border-radius:9px;overflow:hidden;margin-bottom:8px}
+.bar i{display:block;height:100%;background:var(--ok);width:0;transition:width .3s}
+.rules{margin:0;padding-left:20px}.rules li{margin-bottom:6px}
+.contact{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
+.contact:last-child{border-bottom:0}
+.contact .r{font-size:13px;color:var(--muted)}
+.wa{background:#25D366;color:#06301A;text-decoration:none;font-weight:700;font-size:14px;padding:8px 14px;border-radius:99px;flex:none}
+.map{display:block;text-align:center;margin-top:10px;padding:11px;border-radius:12px;border:1.5px solid var(--line);text-decoration:none;color:var(--ink);font-weight:600;font-size:14px}
+
+/* kartu */
+.idcard{background:var(--surface);border:1px solid var(--line);border-radius:22px;overflow:hidden;margin-top:12px}
+.idcard .band{background:var(--navy);color:var(--on-navy);padding:16px 20px;display:flex;justify-content:space-between;align-items:center}
+.idcard .band span{font-size:13px;opacity:.8}
+.idcard .band b{font-family:"Bricolage Grotesque",sans-serif;font-size:18px}
+.idcard .qr{display:grid;place-items:center;padding:24px 20px 8px}
+.idcard .qr svg{width:180px;height:180px;background:#fff;padding:10px;border-radius:12px}
+.idcard .code{text-align:center;font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:26px;letter-spacing:.06em}
+.idcard .who{padding:12px 20px 22px}
+.idcard .kv{grid-template-columns:100px 1fr}
+.note{font-size:13px;color:var(--muted);text-align:center;margin:14px 10px}
+.stack{display:grid;gap:10px;margin-top:16px}
+
+/* nav */
+nav.tabs{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(440px,100%);background:var(--surface);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr);padding:6px 6px calc(6px + env(safe-area-inset-bottom,0px));z-index:5}
+nav.tabs button{background:none;border:0;padding:8px 0 6px;cursor:pointer;color:var(--muted);font-size:12px;font-weight:600;display:flex;flex-direction:column;align-items:center;gap:3px;border-radius:12px}
+nav.tabs button svg{width:22px;height:22px}
+nav.tabs button[aria-current="page"]{color:var(--ink)}
+nav.tabs button[aria-current="page"] svg{color:var(--ink)}
+nav.tabs button[aria-current="page"]::after{content:"";width:18px;height:3px;border-radius:3px;background:var(--sun);margin-top:1px}
+
+/* admin modal */
+.modal{position:fixed;inset:0;background:rgba(10,14,25,.55);display:flex;align-items:flex-end;justify-content:center;z-index:20}
+.sheet{background:var(--surface);width:min(440px,100%);max-height:85vh;overflow:auto;border-radius:22px 22px 0 0;padding:20px 18px calc(20px + env(safe-area-inset-bottom,0px))}
+.sheet h3{font-size:20px}
+.sheet .sub{color:var(--muted);font-size:14px;margin:4px 0 14px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+.stats div{background:var(--soft);border-radius:12px;padding:10px}
+.stats b{display:block;font-size:20px;font-family:"Bricolage Grotesque",sans-serif}
+.stats span{font-size:12px;color:var(--muted)}
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
+table{border-collapse:collapse;width:100%;font-size:13px;min-width:420px}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+th{color:var(--muted);font-weight:600;background:var(--soft)}
+tr.me td{background:color-mix(in srgb,var(--sun) 22%,transparent)}
+.toast{position:fixed;left:50%;bottom:calc(90px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:10px 16px;border-radius:99px;font-size:14px;font-weight:600;z-index:30}
+.link-btn{background:none;border:0;color:var(--muted);text-decoration:underline;cursor:pointer;font-size:13px;padding:6px}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- ============ REGISTRASI ============ -->
+  <section id="reg" hidden>
+    <div class="reg-hero">
+      <svg class="route" viewBox="0 0 180 120" fill="none" aria-hidden="true">
+        <path d="M10 100 C 50 100, 40 40, 90 50 S 150 20, 168 18" stroke="var(--sun)" stroke-width="3" stroke-dasharray="2 8" stroke-linecap="round"/>
+        <circle cx="10" cy="100" r="6" fill="var(--sun)"/>
+        <circle cx="168" cy="18" r="8" stroke="var(--sun)" stroke-width="3"/>
+      </svg>
+      <div class="org">PT Contoh Sejahtera</div>
+      <h1>Company Trip 2026</h1>
+      <p>Semua info perjalanan ada di sini. Daftar sekali, lalu buka kapan saja.</p>
+    </div>
+    <form class="reg-card" id="regForm" novalidate>
+      <h2>Registrasi peserta</h2>
+      <p class="hint">Isi sesuai data karyawan. Hanya butuh 30 detik.</p>
+      <div class="field" id="f-nama">
+        <label for="nama">Nama lengkap</label>
+        <input id="nama" name="nama" autocomplete="name" placeholder="Contoh: Rina Marlina">
+        <div class="err" hidden></div>
+      </div>
+      <div class="field" id="f-dept">
+        <label for="dept">Departemen</label>
+        <select id="dept" name="dept">
+          <option value="">Pilih departemen</option>
+        </select>
+        <div class="err" hidden></div>
+      </div>
+      <div class="field" id="f-hp">
+        <label for="hp">Nomor HP (WhatsApp)</label>
+        <input id="hp" name="hp" type="tel" inputmode="tel" autocomplete="tel" placeholder="08xx xxxx xxxx">
+        <div class="err" hidden></div>
+      </div>
+      <button class="btn" type="submit">Daftar dan lihat info trip</button>
+      <p class="privacy">Data hanya dipakai panitia untuk absensi dan info selama perjalanan.</p>
+    </form>
+    <div class="reg-foot">Sudah pernah daftar di HP ini? Halaman info akan langsung terbuka.</div>
+  </section>
+
+  <!-- ============ MAIN ============ -->
+  <section id="main" hidden>
+    <header class="top">
+      <div>
+        <div class="hi" id="greet">Halo,</div>
+        <div class="name" id="uName"></div>
+      </div>
+      <button class="avatar" id="avatarBtn" aria-label="Buka kartu peserta"></button>
+    </header>
+
+    <main>
+      <!-- Beranda -->
+      <div class="view" id="v-home">
+        <div class="pass">
+          <div class="pass-top">
+            <div class="pass-route">
+              <div><div class="lbl">Berangkat dari</div><div class="city" id="from"></div></div>
+              <div class="mid">
+                <svg width="60" height="14" viewBox="0 0 60 14" fill="none" aria-hidden="true"><path d="M2 7h50" stroke="currentColor" stroke-dasharray="3 4" stroke-width="2"/><path d="M50 2l7 5-7 5" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+                <span id="dur"></span>
+              </div>
+              <div style="text-align:right"><div class="lbl">Tujuan</div><div class="city" id="to"></div></div>
+            </div>
+          </div>
+          <div class="pass-cut"></div>
+          <div class="pass-bot">
+            <div><div class="k">Tanggal</div><div class="v" id="pDate"></div></div>
+            <div><div class="k">Bus</div><div class="v" id="pBus"></div></div>
+            <div><div class="k">Kursi</div><div class="v" id="pSeat"></div></div>
+          </div>
+          <div class="countdown"><span id="cdLabel">Keberangkatan</span><b id="cd"></b></div>
+        </div>
+
+        <div class="quick">
+          <button data-go="jadwal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="17" rx="3"/><path d="M3 9h18M8 2v4M16 2v4"/></svg><span class="t">Jadwal</span><span class="s">Rundown per hari</span></button>
+          <button data-go="info" data-open="bawaan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="7" width="16" height="14" rx="3"/><path d="M9 7V4h6v3"/></svg><span class="t">Barang bawaan</span><span class="s" id="qBawa">Checklist</span></button>
+          <button data-go="info" data-open="kumpul"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-6.5-7-12a7 7 0 0 1 14 0c0 5.5-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/></svg><span class="t">Titik kumpul</span><span class="s">Lokasi dan jam</span></button>
+          <button data-go="info" data-open="kontak"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg><span class="t">Kontak panitia</span><span class="s">WhatsApp langsung</span></button>
+        </div>
+
+        <h2 class="sec-title">Pengumuman</h2>
+        <div class="news" id="news"></div>
+      </div>
+
+      <!-- Jadwal -->
+      <div class="view" id="v-jadwal" hidden>
+        <h2 class="sec-title" style="margin-top:8px">Jadwal perjalanan</h2>
+        <div class="days" role="tablist" id="days"></div>
+        <div class="day-head"><h2 id="dayTitle"></h2><p id="dayNote"></p></div>
+        <ol class="tl" id="tl"></ol>
+      </div>
+
+      <!-- Info -->
+      <div class="view" id="v-info" hidden>
+        <h2 class="sec-title" style="margin-top:8px">Info penting</h2>
+        <details class="acc" id="acc-kumpul" open>
+          <summary>Titik kumpul</summary>
+          <div class="in">
+            <dl class="kv" id="kumpulKv"></dl>
+            <a class="map" id="mapLink" target="_blank" rel="noopener">Buka di Google Maps</a>
+          </div>
+        </details>
+        <details class="acc" id="acc-hotel">
+          <summary>Penginapan</summary>
+          <div class="in"><dl class="kv" id="hotelKv"></dl></div>
+        </details>
+        <details class="acc" id="acc-bawaan">
+          <summary>Checklist barang bawaan</summary>
+          <div class="in">
+            <div class="prog" id="progTxt"></div>
+            <div class="bar"><i id="progBar"></i></div>
+            <ul class="check" id="checklist"></ul>
+          </div>
+        </details>
+        <details class="acc" id="acc-aturan">
+          <summary>Aturan selama perjalanan</summary>
+          <div class="in"><ol class="rules" id="rules"></ol></div>
+        </details>
+        <details class="acc" id="acc-kontak">
+          <summary>Kontak panitia</summary>
+          <div class="in" id="contacts"></div>
+        </details>
+      </div>
+
+      <!-- Kartu -->
+      <div class="view" id="v-kartu" hidden>
+        <h2 class="sec-title" style="margin-top:8px">Kartu peserta</h2>
+        <div class="idcard">
+          <div class="band"><b>Company Trip 2026</b><span>Peserta</span></div>
+          <div class="qr" id="qr"></div>
+          <div class="code" id="kode"></div>
+          <div class="who"><dl class="kv" id="whoKv"></dl></div>
+        </div>
+        <p class="note">Tunjukkan kartu ini ke panitia saat absen di bus dan check-in hotel.</p>
+        <div class="stack">
+          <button class="btn btn-ghost" id="adminBtn">Lihat contoh dashboard panitia</button>
+          <button class="link-btn" id="logout">Bukan Anda? Ganti peserta</button>
+        </div>
+      </div>
+    </main>
+
+    <nav class="tabs" aria-label="Menu utama">
+      <button data-tab="home" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>Beranda</button>
+      <button data-tab="jadwal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="17" rx="3"/><path d="M3 9h18M8 2v4M16 2v4"/></svg>Jadwal</button>
+      <button data-tab="info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg>Info</button>
+      <button data-tab="kartu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="3"/><circle cx="9" cy="11" r="2"/><path d="M6 16c.6-1.4 1.7-2 3-2s2.4.6 3 2M14 10h4M14 13h3"/></svg>Kartu</button>
+    </nav>
+  </section>
+
+  <div class="desk-note">Prototype ini dirancang khusus untuk layar HP. Buka di ponsel untuk pengalaman terbaik.</div>
+</div>
+
+<div class="modal" id="modal" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+    <h3 id="mTitle">Dashboard panitia</h3>
+    <p class="sub">Contoh tampilan admin: daftar peserta yang sudah registrasi, bisa difilter dan diekspor ke Excel di versi final.</p>
+    <div class="stats" id="stats"></div>
+    <div class="tbl-wrap"><table><thead><tr><th>Kode</th><th>Nama</th><th>Departemen</th><th>No HP</th><th>Bus</th></tr></thead><tbody id="tbody"></tbody></table></div>
+    <div class="stack"><button class="btn" id="closeModal">Tutup</button></div>
+  </div>
+</div>
+
+<script>
+/* ===== Semua konten trip diatur di sini (di versi final: dari panel admin) ===== */
+const TRIP = {
+  from: "PKU", fromName: "Pekanbaru", to: "BKT", toName: "Bukittinggi", duration: "± 6 jam",
+  depart: "2026-11-20T05:30:00+07:00", dateLabel: "20–22 Nov",
+  departments: ["Finance & Accounting","HRD & GA","Marketing","Sales","Operasional","Gudang & Logistik","IT","Produksi"],
+  news: [
+    {d:"24 Okt 2026", h:"Batas registrasi 15 November", p:"Peserta yang belum registrasi tidak mendapat nomor kursi bus.", pin:true},
+    {d:"22 Okt 2026", h:"Dresscode malam keakraban", p:"Hari pertama pakai kaos trip yang dibagikan saat berangkat."},
+    {d:"20 Okt 2026", h:"Pembagian kamar diumumkan H-3", p:"Satu kamar untuk 2 orang, dikelompokkan per departemen."}
+  ],
+  days: [
+    {n:"Hari 1", dt:"Jum, 20 Nov", title:"Berangkat dan malam keakraban", note:"Perjalanan darat dengan 3 bus pariwisata.", items:[
+      ["05.30","Kumpul dan absen","Lobi kantor pusat",1],["06.00","Bus berangkat","Tidak menunggu peserta terlambat"],
+      ["09.00","Sarapan","RM Pondok Selera, Bangkinang"],["13.00","Makan siang dan salat","RM Pongek Lamak, Payakumbuh"],
+      ["15.30","Check-in hotel","Hotel Pusako Bukittinggi",1],["19.00","Makan malam dan malam keakraban","Ballroom hotel"]]},
+    {n:"Hari 2", dt:"Sab, 21 Nov", title:"Wisata kota dan gala dinner", note:"Bawa jaket, suhu pagi sekitar 18°C.", items:[
+      ["06.30","Sarapan","Restoran hotel"],["08.00","Jam Gadang dan Pasar Atas","Waktu bebas 90 menit"],
+      ["10.30","Ngarai Sianok dan Lobang Jepang","Dipandu pemandu lokal",1],["13.00","Makan siang","RM Family Benteng"],
+      ["15.00","Istirahat di hotel","Acara bebas"],["19.00","Gala dinner dan doorprize","Ballroom hotel, dresscode batik",1]]},
+    {n:"Hari 3", dt:"Min, 22 Nov", title:"Oleh-oleh dan pulang", note:"Pastikan tidak ada barang tertinggal di kamar.", items:[
+      ["06.30","Sarapan","Restoran hotel"],["09.00","Check-out","Kunci kamar diserahkan ke panitia",1],
+      ["09.30","Belanja oleh-oleh","Pusat Keripik Sanjai"],["12.00","Makan siang di perjalanan","RM Lamun Ombak"],
+      ["18.00","Tiba di Pekanbaru","Estimasi, tergantung lalu lintas",1]]}
+  ],
+  kumpul: [["Lokasi","Lobi kantor pusat, Jl. Sudirman No. 123"],["Jam","05.30 WIB, bus berangkat 06.00"],["Parkir","Motor dan mobil boleh menginap di area belakang"]],
+  maps: "https://maps.google.com/?q=Pekanbaru",
+  hotel: [["Hotel","Hotel Pusako Bukittinggi"],["Check-in","20 Nov, 15.30"],["Check-out","22 Nov, 09.00"],["Kamar","Diumumkan H-3 di halaman ini"]],
+  bawaan: ["KTP / ID karyawan","Kaos trip (dibagikan)","Jaket atau sweater","Baju batik untuk gala dinner","Obat pribadi","Power bank dan charger","Perlengkapan mandi","Uang tunai secukupnya"],
+  rules: ["Ikuti jadwal dan tepat waktu di setiap titik kumpul.","Selalu kabari ketua bus jika memisahkan diri dari rombongan.","Jaga barang pribadi, panitia tidak bertanggung jawab atas kehilangan.","Dilarang membawa minuman keras dan barang terlarang."],
+  contacts: [["Andi Saputra","Ketua panitia","6281234567890"],["Dewi Lestari","Koordinator bus","6281234567891"],["Rudi Hartono","Logistik dan konsumsi","6281234567892"]]
+};
+
+/* ===== Util ===== */
+const $ = s => document.querySelector(s);
+const store = {
+  get(k){ try{ return JSON.parse(localStorage.getItem(k)); }catch(e){ return null; } },
+  set(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} },
+  del(k){ try{ localStorage.removeItem(k); }catch(e){} }
+};
+const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+function hash(str){ let h=2166136261; for(const ch of str){ h^=ch.charCodeAt(0); h=Math.imul(h,16777619);} return h>>>0; }
+function toast(msg){ const t=document.createElement("div"); t.className="toast"; t.textContent=msg; document.body.appendChild(t); setTimeout(()=>t.remove(),2200); }
+let user = store.get("trip_peserta");
+
+/* ===== Registrasi ===== */
+TRIP.departments.forEach(d => { const o=document.createElement("option"); o.value=d; o.textContent=d; $("#dept").appendChild(o); });
+function setErr(id,msg){ const f=$(id); f.classList.toggle("bad",!!msg); const e=f.querySelector(".err"); e.hidden=!msg; e.textContent=msg||""; }
+function normHp(v){ let x=v.replace(/[\s\-().]/g,""); if(x.startsWith("+62")) x="0"+x.slice(3); else if(x.startsWith("62")) x="0"+x.slice(2); return x; }
+$("#regForm").addEventListener("submit", e => {
+  e.preventDefault();
+  const nama=$("#nama").value.trim().replace(/\s+/g," "), dept=$("#dept").value, hp=normHp($("#hp").value);
+  let ok=true;
+  if(nama.length<3){ setErr("#f-nama","Tulis nama lengkap, minimal 3 huruf."); ok=false; } else setErr("#f-nama");
+  if(!dept){ setErr("#f-dept","Pilih departemen Anda."); ok=false; } else setErr("#f-dept");
+  if(!/^08\d{8,11}$/.test(hp)){ setErr("#f-hp","Nomor HP harus diawali 08 dan berisi 10–13 angka."); ok=false; } else setErr("#f-hp");
+  if(!ok) return;
+  const h=hash(hp);
+  user={ nama, dept, hp, kode:"CT-"+String(h%9000+1000), bus:(h%3)+1, kursi:(h>>3)%40+1, at:new Date().toISOString() };
+  store.set("trip_peserta", user);
+  showMain(); toast("Registrasi berhasil. Selamat datang!");
+});
+
+/* ===== Main render ===== */
+function showMain(){
+  $("#reg").hidden=true; $("#main").hidden=false;
+  const first=user.nama.split(" ")[0];
+  const hr=new Date().getHours();
+  $("#greet").textContent = (hr<11?"Selamat pagi,":hr<15?"Selamat siang,":hr<18?"Selamat sore,":"Selamat malam,");
+  $("#uName").textContent = first;
+  $("#avatarBtn").textContent = first.charAt(0).toUpperCase();
+  $("#from").textContent=TRIP.from; $("#to").textContent=TRIP.to; $("#dur").textContent=TRIP.duration;
+  $("#pDate").textContent=TRIP.dateLabel; $("#pBus").textContent=user.bus; $("#pSeat").textContent=user.kursi;
+  $("#news").innerHTML = TRIP.news.map(n=>`<div class="news-item"><div class="d">${esc(n.d)}</div><div class="h">${esc(n.h)}${n.pin?'<span class="pin">Penting</span>':''}</div><p>${esc(n.p)}</p></div>`).join("");
+  renderDays(0); renderInfo(); renderCard(); tick();
+  go(location.hash.slice(1) || "home", true);
+}
+function tick(){
+  const ms=new Date(TRIP.depart)-new Date();
+  if(ms<=0){ $("#cdLabel").textContent="Status"; $("#cd").textContent="Perjalanan dimulai"; return; }
+  const d=Math.floor(ms/864e5), h=Math.floor(ms%864e5/36e5), m=Math.floor(ms%36e5/6e4);
+  $("#cdLabel").textContent="Berangkat dalam"; $("#cd").textContent = d>0 ? `${d} hari ${h} jam` : `${h} jam ${m} menit`;
+}
+setInterval(()=>{ if(user) tick(); }, 30000);
+
+function renderDays(i){
+  $("#days").innerHTML = TRIP.days.map((d,k)=>`<button role="tab" aria-selected="${k===i}" data-day="${k}"><span class="n">${esc(d.n)}</span><span class="dt">${esc(d.dt)}</span></button>`).join("");
+  const d=TRIP.days[i];
+  $("#dayTitle").textContent=d.title; $("#dayNote").textContent=d.note;
+  $("#tl").innerHTML = d.items.map(it=>`<li class="${it[3]?'key':''}"><div class="time">${esc(it[0])}</div><div class="rail"></div><div class="body"><div class="what">${esc(it[1])}</div><div class="where">${esc(it[2])}</div></div></li>`).join("");
+}
+$("#days").addEventListener("click", e => { const b=e.target.closest("[data-day]"); if(b) renderDays(+b.dataset.day); });
+
+const kv = arr => arr.map(([k,v])=>`<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join("");
+function renderInfo(){
+  $("#kumpulKv").innerHTML=kv(TRIP.kumpul); $("#mapLink").href=TRIP.maps;
+  $("#hotelKv").innerHTML=kv(TRIP.hotel);
+  $("#rules").innerHTML=TRIP.rules.map(r=>`<li>${esc(r)}</li>`).join("");
+  $("#contacts").innerHTML=TRIP.contacts.map(([n,r,w])=>`<div class="contact"><div><div style="font-weight:700">${esc(n)}</div><div class="r">${esc(r)}</div></div><a class="wa" target="_blank" rel="noopener" href="https://wa.me/${w}?text=${encodeURIComponent("Halo, saya "+user.nama+" ("+user.dept+"), peserta Company Trip 2026.")}">Chat WA</a></div>`).join("");
+  const done=store.get("trip_bawaan")||[];
+  $("#checklist").innerHTML=TRIP.bawaan.map((b,k)=>`<li><label><input type="checkbox" data-k="${k}" ${done.includes(k)?"checked":""}><span>${esc(b)}</span></label></li>`).join("");
+  updProg();
+}
+function updProg(){
+  const done=[...document.querySelectorAll("#checklist input:checked")].map(x=>+x.dataset.k);
+  store.set("trip_bawaan",done);
+  const t=TRIP.bawaan.length;
+  $("#progTxt").textContent=`${done.length} dari ${t} barang siap`;
+  $("#progBar").style.width=(done.length/t*100)+"%";
+  $("#qBawa").textContent = done.length===t ? "Semua siap" : `${done.length}/${t} siap`;
+}
+$("#checklist").addEventListener("change", updProg);
+
+function qrSvg(seed){
+  const N=25; let s=seed||1; const rnd=()=>{ s^=s<<13; s^=s>>>17; s^=s<<5; return (s>>>0)/4294967296; };
+  let r=""; const finder=(x,y)=>`<rect x="${x}" y="${y}" width="7" height="7" fill="#14213D"/><rect x="${x+1}" y="${y+1}" width="5" height="5" fill="#fff"/><rect x="${x+2}" y="${y+2}" width="3" height="3" fill="#14213D"/>`;
+  const inF=(x,y)=>(x<8&&y<8)||(x>N-9&&y<8)||(x<8&&y>N-9);
+  for(let y=0;y<N;y++) for(let x=0;x<N;x++) if(!inF(x,y)&&rnd()>.52) r+=`<rect x="${x}" y="${y}" width="1" height="1" fill="#14213D"/>`;
+  return `<svg viewBox="0 0 ${N} ${N}" shape-rendering="crispEdges" role="img" aria-label="Kode QR peserta">${r}${finder(0,0)}${finder(N-7,0)}${finder(0,N-7)}</svg>`;
+}
+function renderCard(){
+  $("#qr").innerHTML=qrSvg(hash(user.kode));
+  $("#kode").textContent=user.kode;
+  $("#whoKv").innerHTML=kv([["Nama",user.nama],["Departemen",user.dept],["No HP",user.hp],["Bus / kursi",`Bus ${user.bus}, kursi ${user.kursi}`]]);
+}
+
+/* ===== Navigasi ===== */
+const TABS=["home","jadwal","info","kartu"];
+function go(tab, silent){
+  if(!TABS.includes(tab)) tab="home";
+  TABS.forEach(t=>$("#v-"+t).hidden = t!==tab);
+  document.querySelectorAll("nav.tabs button").forEach(b=>{ if(b.dataset.tab===tab) b.setAttribute("aria-current","page"); else b.removeAttribute("aria-current"); });
+  if(!silent) window.scrollTo({top:0});
+}
+document.querySelector("nav.tabs").addEventListener("click", e => { const b=e.target.closest("[data-tab]"); if(b) go(b.dataset.tab); });
+document.querySelector(".quick").addEventListener("click", e => {
+  const b=e.target.closest("[data-go]"); if(!b) return; go(b.dataset.go);
+  if(b.dataset.open){ const d=$("#acc-"+b.dataset.open); d.open=true; setTimeout(()=>d.scrollIntoView({behavior:"smooth",block:"start"}),50); }
+});
+$("#avatarBtn").addEventListener("click", ()=>go("kartu"));
+$("#logout").addEventListener("click", ()=>{ store.del("trip_peserta"); store.del("trip_bawaan"); user=null; $("#main").hidden=true; $("#reg").hidden=false; $("#regForm").reset(); window.scrollTo({top:0}); });
+
+/* ===== Contoh dashboard panitia ===== */
+const SAMPLE=[["CT-4821","Rina Marlina","Finance & Accounting","0812xxxx2201",1],["CT-1937","Bayu Pratama","Gudang & Logistik","0813xxxx8812",2],["CT-6610","Siti Aminah","HRD & GA","0852xxxx1145",1],["CT-3054","Fajar Nugroho","Sales","0811xxxx7720",3],["CT-7782","Lia Kurniasih","Marketing","0821xxxx3398",2]];
+$("#adminBtn").addEventListener("click", ()=>{
+  const mine=[user.kode,user.nama,user.dept,user.hp.slice(0,4)+"xxxx"+user.hp.slice(-4),user.bus];
+  const rows=[mine,...SAMPLE];
+  $("#stats").innerHTML=`<div><b>148</b><span>Terdaftar</span></div><div><b>32</b><span>Belum daftar</span></div><div><b>3</b><span>Bus</span></div>`;
+  $("#tbody").innerHTML=rows.map((r,i)=>`<tr class="${i===0?'me':''}">${r.map(c=>`<td>${esc(c)}</td>`).join("")}</tr>`).join("");
+  $("#modal").hidden=false; $("#closeModal").focus();
+});
+$("#closeModal").addEventListener("click", ()=>$("#modal").hidden=true);
+$("#modal").addEventListener("click", e=>{ if(e.target.id==="modal") $("#modal").hidden=true; });
+document.addEventListener("keydown", e=>{ if(e.key==="Escape") $("#modal").hidden=true; });
+
+/* ===== Start ===== */
+if(user && user.nama) showMain(); else $("#reg").hidden=false;
+</script>
+</body>
+</html>
